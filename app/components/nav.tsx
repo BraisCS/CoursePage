@@ -1,7 +1,6 @@
 "use client"
 import { useState } from 'react';
 import Image from 'next/image';
-import "../components/NavKeyFrame.css"
 import LogOut from './logOut';
 import Search from './search';
 
