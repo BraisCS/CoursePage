@@ -12,8 +12,6 @@ const handler = NextAuth({
                 password: { label: "Password", type: "password" }
             },
             // @ts-ignore
-
-            
             async authorize(credentials) {
                 
                 if (credentials == undefined) {

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import LogOut from './logOut';
 import Search from './search';
+import "../components/navKeyFrame.css"
 
 export default function Nav({ session }: { session: any }) {
     const [showButtons, setShowButtons] = useState(false);
