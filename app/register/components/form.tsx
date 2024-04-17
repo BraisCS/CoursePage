@@ -32,7 +32,7 @@ export default function Form() {
         };
     
         try {
-            const res = await axios.post('/api/auth/register', body);
+            const res = await axios.post('/api/register', body);
             if (res.status === 200) {
                 setLoading(false)
                 window.location.href = '/login';
