@@ -6,7 +6,17 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  theme: {
+    theme: {
+      colors: {
+        'Light-Green': '#a3f165',
+        'Light-Purple': '#ae8cf1',
+        'Light-Orange': '#eb9718',
+        'Dark': '#242323',
+        'Light': '#F5F5F5',
+      },
+      fontFamily: {
+        DMSans : [ "DM+Sans"],
+      },
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
