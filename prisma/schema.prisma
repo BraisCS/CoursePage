@@ -22,7 +22,7 @@ model course {
   Requirements requirements[]
   price        Float
   modules      module[]
-  imageUrl     String?
+  image        Bytes? // Campo binario para la imagen, asegúrate de que esto está en tu schema
 }
 
 model requirements {

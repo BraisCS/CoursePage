@@ -87,7 +87,7 @@ import { useState, useRef } from "react";
             formData.append("image", file);
   
       try {
-        const res = await axios.post("/api/upload/course", formData, {
+        const res = await axios.post("/api/uploadCourse", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
