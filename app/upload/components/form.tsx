@@ -92,7 +92,7 @@ import { useState, useRef } from "react";
             "Content-Type": "multipart/form-data",
           },
         });
-        console.log(res);
+        window.location.href = "/"
         // Considera restablecer el estado aquí si es necesario
       } catch (error) {
         console.error("Error uploading the file:", error);
