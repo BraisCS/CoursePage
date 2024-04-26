@@ -5,9 +5,9 @@ export default function Search(){
 
   return (
 
-<fieldset className='relative flex flex-row justify-start items-start'>
+<fieldset className='relative flex flex-row justify-start items-start w-[80%]'>
     <input 
-            className='rounded-xl pl-4 py-1' 
+            className='rounded-xl pl-4 py-1 w-full' 
             type="text" 
             placeholder='Buscar un curso...' 
     />

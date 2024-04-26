@@ -13,8 +13,8 @@ export default function Nav({ session }: { session: any }) {
     return (
         <>
         {/* Pantallas grandes */}
-        <nav className="h-16 w-[90%] border-b border-Light-Orange flex flex-row justify-between items-center lg:block">
-        <div className='flex flex-row justify-between items-center h-full w-full'>
+        <nav className="h-16 w-[90%] border-b border-Light-Orange lg:flex flex-row justify-between items-center hidden">
+            <div className='flex flex-row justify-between items-center h-full w-full'>
             <p className="text-white text-xs">LOGOss</p>
             <div className='flex flex-row justify-end items-center h-full w-full gap-5'>
                 {session ? <LogOut /> : null}
@@ -38,39 +38,29 @@ export default function Nav({ session }: { session: any }) {
 
         {/* Pantallas pequeñas */}
         <nav className="h-16 w-[90%] border-b border-Light-Orange flex flex-row justify-between items-center lg:hidden">
-        {showButtons && (
+            {showButtons && (
             <>
-                <div className="absolute bg-Dark w-full h-full top-0 left-0 z-10 "></div>
-                <div className="absolute w-[90%] bg-Dark flex flex-row justify-between items-center z-50">
-                    {!session ? 
-                    <>
-                        <a href='/register' className="fixed h-14 w-[90%] flex flex-row justify-center items-center bottom-[4.5rem] ml-0 bg-Light-Orange cursor-pointer">
-                            <p className="font-DMSans text-[#ffffff] text-lg font-normal">Únete de forma gratuita</p>
-                        </a>
-                        <a href='/login' className="fixed h-14 w-[90%] flex flex-row justify-center items-center bottom-2 border-2 border-Light-Orange bg-Dark cursor-pointer">
-                            <p className="font-DMSans text-Light-Orange text-lg font-normal">Inicia Sesión</p>
-                        </a>
-                    </> : null }
-                    <div className="w-[100%] flex flex-col justify-start items-start mt-32 relative"> {/* Asegúrate de que este contenedor sea relativo */}
-                        {session ? <LogOut /> : null}
-                        {session ? <a href="/upload" className="block font-DMSans text-[#ffffff] text-lg font-normal">Subir Curso</a> : null}
-                        <a href="/blog" className="block font-DMSans text-[#ffffff] text-lg font-normal">Blog</a>
-                        {session ? <a href="/blog" className="block font-DMSans text-[#ffffff] text-lg font-normal">Mis Cursos</a> : null}
-                        <div className='w-full flex flex-row justify-between items-start'>
-                            <p className='font-DMSans text-[#ffffff] text-lg font-normal'> Cursos </p>
-                            <Image onClick={() => setShowCoursers(!showCourses)} className="cursor-pointer text-Light-Orange" src={"/arrow-down.svg"} alt="Icono de cierre" height={30} width={30} />
-                        </div>
-                        {showCourses && (
-                            <div className="relative top-full left-5 w-full"> {/* Este contenedor se posiciona absolutamente para expandirse hacia abajo */}
-                                <a href="/blog" className="font-DMSans text-[#ffffff] text-lg font-normal block">Marketing</a>
-                                <a href="/blog" className="font-DMSans text-[#ffffff] text-lg font-normal block" >Data Base</a>
-                                <a href="/blog" className="font-DMSans text-[#ffffff] text-lg font-normal block" >Back-end</a>
-                                <a href="/curso/front-end" className="font-DMSans text-[#ffffff] text-lg font-normal block">Front-end</a>
-                            </div>
-                        )}
-                    <Search/>
+                <div className="fixed bg-Dark w-full h-full top-0 left-0 z-10 "></div>
+                <div className="fixed w-[90%] top-3 bg-Dark flex flex-col gap-10 z-50 ">
+                    <div className='w-full flex flex-row justify-end '>
+                        <Image onClick={() => setShowButtons(!showButtons)} className="cursor-pointer h-9 w-9" src={"/cross.svg"} alt="Icono de cierre" height={30} width={30} />
                     </div>
-                    <Image onClick={() => setShowButtons(!showButtons)} className="cursor-pointer h-9 w-9" src={"/cross.svg"} alt="Icono de cierre" height={30} width={30} />
+                    <div className="relative w-full flex flex-col justify-start items-start gap-5 "> {/* Asegúrate de que este contenedor sea relativo */}
+                        <Search/>
+                        {session ? <a href="/blog" className="block font-DMSans text-[#ffffff] text-lg font-normal">Mis Cursos</a> : null}
+                        <a href="/blog" className="block font-DMSans text-[#ffffff] text-lg font-normal">Blog</a>
+                        {session ? <a href="/upload" className="block font-DMSans text-[#ffffff] text-lg font-normal">Subir Curso</a> : null}
+                        {session ? <LogOut /> : null}
+                        {!session ? 
+                        <>
+                            <a href='/register' className="fixed h-14 w-[90%] flex flex-row justify-center items-center bottom-[4.5rem] ml-0 bg-Light-Orange cursor-pointer">
+                                <p className="font-DMSans text-[#ffffff] text-lg font-normal">Únete de forma gratuita</p>
+                            </a>
+                            <a href='/login' className="fixed h-14 w-[90%] flex flex-row justify-center items-center bottom-2 border-2 border-Light-Orange bg-Dark cursor-pointer">
+                                <p className="font-DMSans text-Light-Orange text-lg font-normal">Inicia Sesión</p>
+                            </a>
+                        </> : null }
+                    </div>
                 </div>
             </>
         )}
