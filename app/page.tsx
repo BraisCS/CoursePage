@@ -1,9 +1,27 @@
 import { getServerSession } from "next-auth";
 import Nav from "./components/nav";
 import "./globals.css"
+import CourseInfo from "./homecomponents/CourseInfo";
+import { PrismaClient } from '@prisma/client';
 
 export default async function Home() {
   const session = await getServerSession();
+  const prisma = new PrismaClient();
+  const courses = await prisma.course.findMany({
+    include: {
+      Requirements: true,
+      modules: {
+        include: {
+          lessons: true,
+        },
+      },
+    },
+  });
+
+  const coursesWithImages = courses.map(course => ({
+    ...course,
+    image: course.image ? `data:image/jpeg;base64,${Buffer.from(course.image).toString('base64')}` : null,
+  }));
 
   return (
     <>
@@ -34,8 +52,11 @@ export default async function Home() {
             </div>
         </div>
         <div className="h-16 w-[90%] border-b border-b-Light-Purple  flex flex-row justify-between items-center lg:block"></div>
-        <div className="w-full px-3 py-2 rounded-md mt-10">
+        <div className="w-full flex flex-col justify-start items-center px-3 py-2 rounded-md mt-10">
           <p className="text-[#ffffff] font-DMSans font-normal text-xl text-center">Cursos más recientes</p>
+          <div className="flex flex-row justify-evenly items-center w-full mt-10">
+          <CourseInfo courses={coursesWithImages} /> 
+          </div>
         </div>
       </main>
       </article>
