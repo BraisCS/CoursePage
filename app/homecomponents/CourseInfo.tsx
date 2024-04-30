@@ -15,13 +15,13 @@ export default function CourseInfo({ courses }: { courses: Course[] }) {
     return (
     <>
         {recentCourses.map(course => (
-        <div key={course.id} className="bg-Light-Orange  w-[30%] h-auto p-2 rounded-md">
+        <div key={course.id} className="bg-Light-Orange w-[30%] h-auto p-2 rounded-md">
             {course.image ? (
-                <Image height={1200} width={1200} src={course.image} alt="Imagen del curso" className="w-full h-80 object-cover" />
+                <Image height={1200} width={1200} src={course.image} alt="Imagen del curso" className="w-full h-60 object-cover" />
             ) : (
                 null)}
-            <p className="text-[#ffffff] font-DMSans font-normal text-xl text-center ">{course.title}</p>
-            <div className="flex flex-row justify-start items-center w-full">
+            <p className="text-[#ffffff] font-DMSans font-normal text-xl text-center mt-5">{course.title}</p>
+            <div className="flex flex-row justify-between items-center w-full mt-3">
                 <p className="text-[#ffffff] font-DMSans font-normal text-xl text-center ">{course.category}</p>
                 <p className="text-[#ffffff] font-DMSans font-normal text-xl text-center ">{course.price}€</p>
             </div>

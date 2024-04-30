@@ -109,8 +109,7 @@ import { useState, useRef } from "react";
 
   return (
     <form onSubmit={handleSubmit} ref={formRef} className=" flex flex-col items-center gap-5 w-full mt-10 px-5">
-
-      <fieldset className="flex flex-col justify-start items-center w-full gap-3 ">
+      <fieldset className="flex flex-col justify-start items-center w-1/2 gap-3 ">
         <label htmlFor="title"  className="text-start w-full text-[#ffffff] font-normal font-DMSans text-xl"> Titulo</label>
         <input 
           className="bg-[#ffffff19] h-10 w-[100%] px-2 font-DMSans font-light text-[#FFFFFF] outline-none" 
@@ -120,7 +119,7 @@ import { useState, useRef } from "react";
           />
       </fieldset>
       {modules.map((module, moduleIndex) => (
-        <fieldset key={module.moduleId} className="flex flex-col gap-3">
+        <fieldset key={module.moduleId} className="flex flex-col gap-3 w-1/2">
           <label className="text-[#ffffff] font-normal text-xl">Título del módulo</label>
           <input
             className="bg-[#ffffff19] text-[#FFFFFF] outline-none px-2 h-10"
@@ -149,7 +148,7 @@ import { useState, useRef } from "react";
         Añadir módulo
       </button>
 
-      <fieldset className="flex flex-col justify-start items-center w-full gap-3 ">
+      <fieldset className="flex flex-col justify-start items-center w-1/2 gap-3 ">
         <label htmlFor="introduction" className="text-start w-full  text-[#ffffff] font-normal font-DMSans text-xl"> Introdución </label>
         <input 
           className="bg-[#ffffff19] h-10 w-[100%] px-2 font-DMSans font-light text-[#FFFFFF] outline-none" 
@@ -158,7 +157,7 @@ import { useState, useRef } from "react";
         />
       </fieldset>
 
-      <fieldset className="flex flex-col justify-start items-center w-full gap-3 ">
+      <fieldset className="flex flex-col justify-start items-center w-1/2 gap-3 ">
         <label htmlFor="category" className="text-start w-full  text-[#ffffff] font-normal font-DMSans text-xl"> Categoría </label>
         <select 
           onChange={(e) => setCategory(e.target.value)}
@@ -171,7 +170,7 @@ import { useState, useRef } from "react";
         </select>
       </fieldset>
 
-      <fieldset className="flex flex-col justify-start items-center w-full gap-3">
+      <fieldset className="flex flex-col justify-start items-center w-1/2 gap-3">
         <label htmlFor="requirements" className="text-start w-full text-[#ffffff] font-normal font-DMSans text-xl">Requisito</label>
         {requirements.map((input, index) => (
           <input
@@ -187,7 +186,7 @@ import { useState, useRef } from "react";
       </fieldset>
 
 
-      <fieldset className="flex flex-row justify-around items-center w-full gap-3 ">
+      <fieldset className="flex flex-row justify-around items-center w-1/2 gap-3 ">
         <label htmlFor="price" className="w-[50%] text-[#ffffff] font-normal font-DMSans text-xl ">Precio del curso</label>
         <input 
           className="bg-[#ffffff19] h-10 px-2 font-DMSans font-light text-[#FFFFFF] outline-none w-[20%]" 
@@ -196,11 +195,11 @@ import { useState, useRef } from "react";
         />
       </fieldset>
 
-      <fieldset className="flex flex-col justify-center items-center h-full  w-full gap-3 px-3 py-3">
+      <fieldset className="flex flex-col justify-start items-center h-full w-1/2 gap-3 px-3 py-3">
         <div className="w-full flex flex-row">
-        <label htmlFor="image"  className="text-start w-full text-[#ffffff] font-normal font-DMSans text-xl"> Sube una imagen</label> 
-        {file && (   <p onClick={handleCancelFile} className="text-[#cc4242]  font-normal font-DMSans text-xl"> Cancelar </p> ) }
+          <label htmlFor="image"  className="text-start w-full text-[#ffffff] font-normal font-DMSans text-xl"> Sube una imagen</label> 
         </div>
+        <div className="border-[1px] border-Light-Purple py-5 px-3 flex flex-row justify-evenly items-center w-full">
         <input 
           type="file" 
           name="file" 
@@ -210,22 +209,22 @@ import { useState, useRef } from "react";
                               setFile(null); 
                             }}
           }
-          className="w-full text border-[1px] border-Light-Purple py-5 px-3 text-[#FFFFFF]"  />
-          {file && (
+          className="text-[#FFFFFF]"  />
+        {file && (
         <Image 
           width={250} 
           height={250} 
           src={URL.createObjectURL(file)} 
           alt="Imagen cargada" 
+          className=" object-cover h-36 bg-Light-Orange "
         />
       )}
+      {file && ( <p onClick={handleCancelFile} className="text-[#cc4242]  font-normal font-DMSans text-xl cursor-pointer hover:font-bold"> Cancelar </p> ) }
+        </div>
       </fieldset>
       
-      <button type="submit" className="bg-Light-Orange text-[#ffffff] font-normal font-DMSans text-xl px-3 py-1">Subir Imagen</button>
-      
-      
+      <button type="submit" className="bg-Light-Orange text-[#ffffff] font-normal font-DMSans text-xl px-3 py-1">Subir Curso</button>
           <p className=" bg-Light-Green">{error}</p>
-
     </form>
   );
 }
