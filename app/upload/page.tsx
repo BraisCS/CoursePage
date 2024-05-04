@@ -7,7 +7,7 @@ export default async function Page() {
   const session = await getServerSession();
   return (
     <article className="w-full flex flex-col items-center">
-    <Nav session={session} /> 
+      <Nav session={session} /> 
       <UploadCourseForm/>
     </article>
   );

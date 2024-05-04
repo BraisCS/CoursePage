@@ -84,7 +84,7 @@ import { useState, useRef } from "react";
       formData.append("price", price.toString());
       const modulesJSON = JSON.stringify(modules);
       formData.append("modules", modulesJSON);
-            formData.append("image", file);
+      formData.append("image", file);      
   
       try {
         const res = await axios.post("/api/uploadCourse", formData, {
@@ -93,7 +93,6 @@ import { useState, useRef } from "react";
           },
         });
         window.location.href = "/"
-        // Considera restablecer el estado aquí si es necesario
       } catch (error) {
         console.error("Error uploading the file:", error);
         setError("Error al subir el archivo");
@@ -104,30 +103,28 @@ import { useState, useRef } from "react";
       formRef.current?.reset();
       setFile(null);
       setError("");
-    };
-
+    };    
 
   return (
     <form onSubmit={handleSubmit} ref={formRef} className=" flex flex-col items-center gap-5 w-full mt-10 px-5">
       <fieldset className="flex flex-col justify-start items-center w-1/2 gap-3 ">
-        <label htmlFor="title"  className="text-start w-full text-[#ffffff] font-normal font-DMSans text-xl"> Titulo</label>
+        <label htmlFor="title" className="text-start w-full text-[#ffffff] font-normal font-DMSans text-xl"> Titulo</label>
         <input 
           className="bg-[#ffffff19] h-10 w-[100%] px-2 font-DMSans font-light text-[#FFFFFF] outline-none" 
           type="text"
           maxLength={50} 
+          required
           onChange={(e) => setTitle(e.target.value)}
           />
       </fieldset>
-      {modules.map((module, moduleIndex) => (
+      {modules.map((module) => (
         <fieldset key={module.moduleId} className="flex flex-col gap-3 w-1/2">
           <label className="text-[#ffffff] font-normal text-xl">Título del módulo</label>
           <input
             className="bg-[#ffffff19] text-[#FFFFFF] outline-none px-2 h-10"
             type="text"
-            value={module.title}
             onChange={e => handleModuleTitleChange(module.moduleId, e.target.value)}
-          />
-
+            />
           {module.lessons.map((lesson, lessonIndex) => (
             <div key={lesson.lessonId} className="flex flex-col">
               <label className="text-[#ffffff] font-normal">Título de la lección</label>

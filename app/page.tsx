@@ -54,7 +54,7 @@ export default async function Home() {
         <div className="h-16 w-[90%] border-b border-b-Light-Purple  flex flex-row justify-between items-center lg:block"></div>
         <div className="w-full flex flex-col justify-start items-center px-3 py-2 rounded-md mt-10">
           <p className="text-[#ffffff] font-DMSans font-normal text-xl text-center">Cursos más recientes</p>
-          <div className="flex flex-row justify-evenly items-center w-full mt-10">
+          <div className="flex flex-col lg:flex-row justify-evenly items-center gap-5  w-full mt-10">
             <CourseInfo courses={coursesWithImages} /> 
           </div>
         </div>
