@@ -19,8 +19,13 @@ const config: Config = {
       },
     extend: {
       backdropFilter: { 'none': 'none', 'blur': 'blur(20px)' },
+      backgroundImage: {
+        'fade-to-t': 'linear-gradient(to top, #ae8cf1)',   
+        'fade-to-b': 'linear-gradient(to bottom, transparent, #ae8cf1)' 
+      }
     },
   },
   plugins: [],
 };
 export default config;
+
