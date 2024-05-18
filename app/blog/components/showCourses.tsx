@@ -1,6 +1,7 @@
 "use client"
 import Image from 'next/image';
 
+
 interface Lesson {
   id: number;
   title: string;
@@ -11,7 +12,7 @@ interface Module {
   id: number;
   title: string;
   courseId?: number;
-  lessons: Lesson[]; // Asegúrate de que esta propiedad coincida con la estructura de datos.
+  lessons: Lesson[];
 }
 
 interface Requirement {
@@ -24,13 +25,13 @@ interface Course {
   id: number;
   title: string;
   category: string;
-  Requirements: Requirement[];
+  requirements: Requirement[];
   modules: Module[];
   image: string | null;  // Asumiendo que siempre se envía una URL en Base64 o null
   price: number;
 }
 
-export default function ShowCourses({ courses }: { courses: Course[] }) {
+export default function ShowCourses({ courses } : { courses: Course[] }) {
   return (
     <>
       {courses.map((course) => (

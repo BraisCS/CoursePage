@@ -9,6 +9,7 @@ export async function POST(request: any) {
   const category = data.get("category");
   const price = parseFloat(data.get("price"));
   const imageFile = data.get("image");
+  const modules = JSON.parse(data.get("modules"));  // Parsear los módulos
 
   // Convertir la imagen a Buffer
   const imageBuffer = Buffer.from(await imageFile.arrayBuffer());
@@ -21,7 +22,20 @@ export async function POST(request: any) {
         introduction,
         category,
         price,
-        image: imageBuffer,  // Guardar el buffer directamente en la base de datos
+        image: imageBuffer,
+        max_stundets: 4,
+        level: 7,
+        public: true,
+        modules: {
+          create: modules.map((module: any) => ({
+            title: module.title,
+            lessons: {
+              create: module.lessons.map((lesson: any) => ({
+                title: lesson.title,
+              })),
+            },
+          })),
+        },
       },
     });
 

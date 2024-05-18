@@ -3,12 +3,13 @@ import { PrismaClient } from "@prisma/client";
 import Nav from "../components/nav";
 import ShowCourses from "./components/showCourses";
 
+
 export default async function page() {
   const session = await getServerSession();
   const prisma = new PrismaClient();
   const courses = await prisma.course.findMany({
     include: {
-      Requirements: true,
+      requirements: true,
       modules: {
         include: {
           lessons: true,

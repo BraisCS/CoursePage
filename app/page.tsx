@@ -1,7 +1,6 @@
 import { getServerSession } from "next-auth";
 import Nav from "./components/nav";
 import "./globals.css"
-import CourseInfo from "./homecomponents/CourseInfo";
 import { PrismaClient } from '@prisma/client';
 import Main from "./homecomponents/main";
 
@@ -10,7 +9,7 @@ export default async function Home() {
   const prisma = new PrismaClient();
   const courses = await prisma.course.findMany({
     include: {
-      Requirements: true,
+      requirements: true,
       modules: {
         include: {
           lessons: true,

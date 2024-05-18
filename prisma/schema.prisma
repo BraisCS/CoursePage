@@ -19,13 +19,25 @@ model course {
   title        String
   introduction String
   category     String
-  Requirements requirements[]
+  max_stundets Int
+  level        Int
+  public       Boolean
+  qandr        qandr[]
+  requirements Requirements[]
   price        Float
   modules      module[]
   image        Bytes? // Campo binario para la imagen, asegúrate de que esto está en tu schema
 }
 
-model requirements {
+model qandr {
+  id       Int    @id @default(autoincrement())
+  question String
+  request  String
+  courseId Int
+  course   course @relation(fields: [courseId], references: [id])
+}
+
+model Requirements {
   id       Int    @id @default(autoincrement())
   title    String
   courseId Int

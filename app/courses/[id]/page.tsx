@@ -8,7 +8,7 @@ export default async function Page() {
   const prisma = new PrismaClient();
   const courses = await prisma.course.findMany({
     include: {
-      Requirements: true,
+      requirements: true,
       modules: {
         include: {
           lessons: true,
