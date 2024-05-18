@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import axios from "axios";
 import Image from "next/image";
 import { useState, useRef } from "react";
@@ -8,10 +8,13 @@ export default function UploadCourseForm() {
   const [introduction, setIntroduction] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState<number>(0);
-  const [requirements, setRequirements] = useState([{ id: 1, value: "" }]);
+  const [requirements, setRequirements] = useState([{ id: Date.now(), value: "" }]);
   const [modules, setModules] = useState([
     { moduleId: Date.now(), title: "", lessons: [{ lessonId: Date.now(), title: "" }] }
   ]);
+  const [maxStudents, setMaxStudents] = useState<number>(0);
+  const [level, setLevel] = useState<number>(1);
+  const [publics, setPublics] = useState<boolean>(true);
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
@@ -79,11 +82,12 @@ export default function UploadCourseForm() {
     formData.append("title", title);
     formData.append("introduction", introduction);
     formData.append("category", category);
-    const requirementsJSON = JSON.stringify(requirements.map(req => req.value));
-    formData.append("requirements", requirementsJSON);
+    formData.append("requirements", JSON.stringify(requirements.map(req => req.value)));
     formData.append("price", price.toString());
-    const modulesJSON = JSON.stringify(modules);
-    formData.append("modules", modulesJSON);
+    formData.append("modules", JSON.stringify(modules));
+    formData.append("maxStudents", maxStudents.toString());
+    formData.append("level", level.toString());
+    formData.append("publics", publics.toString());
     formData.append("image", file);
 
     try {
@@ -106,9 +110,9 @@ export default function UploadCourseForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} ref={formRef} className=" flex flex-col items-center gap-5 w-full mt-10 px-5">
-      <fieldset className="flex flex-col justify-start items-center w-1/2 gap-3 ">
-        <label htmlFor="title" className="text-start w-full text-[#ffffff] font-normal font-DMSans text-xl"> Titulo</label>
+    <form onSubmit={handleSubmit} ref={formRef} className="flex flex-col items-center gap-5 w-full mt-10 px-5">
+      <fieldset className="flex flex-col justify-start items-center w-1/2 gap-3">
+        <label htmlFor="title" className="text-start w-full text-[#ffffff] font-normal font-DMSans text-xl">Titulo</label>
         <input 
           className="bg-[#ffffff19] h-10 w-[100%] px-2 font-DMSans font-light text-[#FFFFFF] outline-none" 
           type="text"
@@ -125,7 +129,7 @@ export default function UploadCourseForm() {
             type="text"
             onChange={e => handleModuleTitleChange(module.moduleId, e.target.value)}
           />
-          {module.lessons.map((lesson, lessonIndex) => (
+          {module.lessons.map((lesson) => (
             <div key={lesson.lessonId} className="flex flex-col">
               <label className="text-[#ffffff] font-normal">Título de la lección</label>
               <input
@@ -145,17 +149,49 @@ export default function UploadCourseForm() {
         Añadir módulo
       </button>
 
-      <fieldset className="flex flex-col justify-start items-center w-1/2 gap-3 ">
-        <label htmlFor="introduction" className="text-start w-full  text-[#ffffff] font-normal font-DMSans text-xl"> Introducción </label>
+      <fieldset className="flex flex-col justify-start items-center w-1/2 gap-3">
+        <label htmlFor="introduction" className="text-start w-full text-[#ffffff] font-normal font-DMSans text-xl">Introducción</label>
         <input 
           className="bg-[#ffffff19] h-10 w-[100%] px-2 font-DMSans font-light text-[#FFFFFF] outline-none" 
-          type="text" 
+          type="text"
           onChange={(e) => setIntroduction(e.target.value)}
         />
       </fieldset>
 
-      <fieldset className="flex flex-col justify-start items-center w-1/2 gap-3 ">
-        <label htmlFor="category" className="text-start w-full  text-[#ffffff] font-normal font-DMSans text-xl"> Categoría </label>
+      <fieldset className="flex flex-col justify-start items-center w-1/2 gap-3">
+        <label htmlFor="maxStudents" className="text-start w-full text-[#ffffff] font-normal font-DMSans text-xl">Número máximo de estudiantes</label>
+        <input 
+          className="bg-[#ffffff19] h-10 w-[100%] px-2 font-DMSans font-light text-[#FFFFFF] outline-none" 
+          type="number" 
+          value={maxStudents}
+          onChange={(e) => setMaxStudents(parseInt(e.target.value))}
+        />
+      </fieldset>
+
+      <fieldset className="flex flex-col justify-start items-center w-1/2 gap-3">
+        <label htmlFor="level" className="text-start w-full text-[#ffffff] font-normal font-DMSans text-xl">Escoge un nivel entre 1 y 5</label>
+        <input 
+          className="bg-[#ffffff19] h-10 w-[100%] px-2 font-DMSans font-light text-[#FFFFFF] outline-none" 
+          type="number"
+          value={level}
+          onChange={(e) => setLevel(parseInt(e.target.value))}
+          min={1}
+          max={5}
+        />
+      </fieldset>
+
+      <fieldset className="flex flex-col justify-start items-center w-1/2 gap-3">
+        <label htmlFor="publics" className="text-start w-full text-[#ffffff] font-normal font-DMSans text-xl">Es público?</label>
+        <input 
+          className="bg-[#ffffff19] h-10 w-[100%] px-2 font-DMSans font-light text-[#FFFFFF] outline-none" 
+          type="checkbox" 
+          checked={publics}
+          onChange={(e) => setPublics(e.target.checked)}
+        />
+      </fieldset>
+
+      <fieldset className="flex flex-col justify-start items-center w-1/2 gap-3">
+        <label htmlFor="category" className="text-start w-full text-[#ffffff] font-normal font-DMSans text-xl">Categoría</label>
         <select 
           onChange={(e) => setCategory(e.target.value)}
           className="bg-[#ffffff19] h-10 w-[100%] px-2 font-DMSans font-light text-[#FFFFFF] outline-none" 
@@ -169,12 +205,11 @@ export default function UploadCourseForm() {
 
       <fieldset className="flex flex-col justify-start items-center w-1/2 gap-3">
         <label htmlFor="requirements" className="text-start w-full text-[#ffffff] font-normal font-DMSans text-xl">Requisito</label>
-        {requirements.map((input, index) => (
+        {requirements.map((input) => (
           <input
             key={input.id}
             className="bg-[#ffffff19] h-10 w-[100%] px-2 font-DMSans font-light text-[#FFFFFF] outline-none"
             type="text"
-            id={`input-requirement-${input.id}`}
             value={input.value}
             onChange={(e) => handleInputChange(input.id, e.target.value)}
           />
@@ -182,18 +217,19 @@ export default function UploadCourseForm() {
         <p className="cursor-pointer text-[#ffffff]" onClick={addInput}>Más</p>
       </fieldset>
 
-      <fieldset className="flex flex-row justify-around items-center w-1/2 gap-3 ">
-        <label htmlFor="price" className="w-[50%] text-[#ffffff] font-normal font-DMSans text-xl ">Precio del curso</label>
+      <fieldset className="flex flex-row justify-around items-center w-1/2 gap-3">
+        <label htmlFor="price" className="w-[50%] text-[#ffffff] font-normal font-DMSans text-xl">Precio del curso</label>
         <input 
           className="bg-[#ffffff19] h-10 px-2 font-DMSans font-light text-[#FFFFFF] outline-none w-[20%]" 
           type="number"
+          value={price}
           onChange={(e) => setPrice(+e.target.value)}
         />
       </fieldset>
 
       <fieldset className="flex flex-col justify-start items-center h-full w-1/2 gap-3 px-3 py-3">
         <div className="w-full flex flex-row">
-          <label htmlFor="image"  className="text-start w-full text-[#ffffff] font-normal font-DMSans text-xl"> Sube una imagen</label> 
+          <label htmlFor="image" className="text-start w-full text-[#ffffff] font-normal font-DMSans text-xl">Sube una imagen</label>
         </div>
         <div className="border-[1px] border-Light-Purple py-5 px-3 flex flex-row justify-evenly items-center w-full">
           <input 
@@ -205,22 +241,25 @@ export default function UploadCourseForm() {
                                 setFile(null); 
                               }}
             }
-            className="text-[#FFFFFF]"  />
+            className="text-[#FFFFFF]"  
+          />
           {file && (
             <Image 
               width={250} 
               height={250} 
               src={URL.createObjectURL(file)} 
               alt="Imagen cargada" 
-              className=" object-cover h-36 bg-Light-Orange "
+              className="object-cover h-36 bg-Light-Orange"
             />
           )}
-          {file && ( <p onClick={handleCancelFile} className="text-[#cc4242]  font-normal font-DMSans text-xl cursor-pointer hover:font-bold"> Cancelar </p> ) }
+          {file && (
+            <p onClick={handleCancelFile} className="text-[#cc4242] font-normal font-DMSans text-xl cursor-pointer hover:font-bold">Cancelar</p>
+          )}
         </div>
       </fieldset>
       
       <button type="submit" className="bg-Light-Orange text-[#ffffff] font-normal font-DMSans text-xl px-3 py-1">Subir Curso</button>
-      <p className=" bg-Light-Green">{error}</p>
+      <p className=" text-[#c13d3d]">{error}</p>
     </form>
   );
 }

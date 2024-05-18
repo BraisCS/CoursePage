@@ -9,7 +9,11 @@ export async function POST(request: any) {
   const category = data.get("category");
   const price = parseFloat(data.get("price"));
   const imageFile = data.get("image");
-  const modules = JSON.parse(data.get("modules"));  // Parsear los módulos
+  const modules = JSON.parse(data.get("modules"));
+  const publics = data.get("publics") === 'true'; // Convertir a booleano
+  const maxStudents = parseInt(data.get("maxStudents"));
+  const level = parseInt(data.get("level"));
+
 
   // Convertir la imagen a Buffer
   const imageBuffer = Buffer.from(await imageFile.arrayBuffer());
@@ -23,9 +27,9 @@ export async function POST(request: any) {
         category,
         price,
         image: imageBuffer,
-        max_stundets: 4,
-        level: 7,
-        public: true,
+        max_stundets: maxStudents,
+        level: level,
+        public: publics,
         modules: {
           create: modules.map((module: any) => ({
             title: module.title,
