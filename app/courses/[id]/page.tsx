@@ -22,13 +22,10 @@ export default async function Page() {
     image: course.image ? `data:image/jpeg;base64,${Buffer.from(course.image).toString('base64')}` : null,
   }));
 
-
-    return (
-      <>
-      <article className="w-full flex flex-col items-center">
-        <Nav session={session} /> 
-        <SelectId courses={coursesWithImages} />
-      </article>
-      </>
-    );
+  return (
+    <article className="w-full flex flex-col items-center">
+      <Nav session={session} />
+      <SelectId courses={coursesWithImages} />
+    </article>
+  );
 }

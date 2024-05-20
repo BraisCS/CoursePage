@@ -15,7 +15,7 @@ export default function Nav({ session }: { session: any }) {
         {/* Pantallas grandes */}
         <nav className="h-16 w-[90%] border-b border-Light-Orange lg:flex flex-row justify-between items-center hidden">
             <div className='flex flex-row justify-between items-center h-full w-full'>
-            <p className="text-white text-xs">LOGOss</p>
+            <a href='/' className="text-white text-xs cursor-pointer">LOGOss</a> 
             <div className='flex flex-row justify-end items-center h-full w-full gap-5'>
                 {session ? <LogOut /> : null}
                 {session ? <a href="/upload" className="block font-DMSans text-[#ffffff] text-lg font-normal">Subir Curso</a> : null}
@@ -64,7 +64,7 @@ export default function Nav({ session }: { session: any }) {
                 </div>
             </>
         )}
-        <p className="text-white text-xs">LOGOss</p> 
+        <a href='/' className="text-white text-xs cursor-pointer">LOGOss</a> 
         <Image onClick={() => setShowButtons(!showButtons)} className="cursor-pointer h-9 w-9" src={"/menu.svg"} alt="Icono de menú" height={30} width={30} />
         </nav>
     </>

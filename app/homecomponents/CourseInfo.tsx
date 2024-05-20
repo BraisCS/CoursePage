@@ -1,32 +1,50 @@
+"use client";
 import Link from 'next/link';
 import Image from 'next/image';
+import CourseGlassphormish from './courseGlassphormish';
 
-interface Course {
+interface Requirement {
+    id: number;
+    title: string;
+  }
+  
+  interface Lesson {
+    id: number;
+    title: string;
+  }
+  
+  interface Module {
+    id: number;
+    title: string;
+    lessons: Lesson[];
+  }
+  
+  interface Course {
     id: number;
     title: string;
     category: string;
-    image: string | null; 
+    image: string | null;
     price: number;
-}
-
+    introduction: string;
+    requirements: Requirement[];
+    modules: Module[];
+    updatedAt: Date;
+  }
 export default function CourseInfo({ courses }: { courses: Course[] }) {
-    const recentCourses = courses.slice(0, 3);
+  const recentCourses = courses.slice(1, 4);
 
-    return (
-        <div className="flex flex-wrap justify-center items-center gap-4 relative group w-full"> {/* Contenedor del grupo con propiedad group */}
-            {recentCourses.map(course => (
-                <Link href={`/courses/${course.id}`} key={course.id} 
-                    className="w-full lg:w-[30%] h-auto p-3 rounded-md border-2 border-Dark cursor-pointer hover:scale-110 transition-opacity duration-400 opacity-100 hover:opacity-100 group-hover:opacity-0 hover:group-hover:opacity-100">
-                    {course.image && (
-                        <Image height={1200} width={1200} src={course.image} alt={`Imagen del curso ${course.title}`} className="w-full h-60 object-cover" />
-                    )}
-                    <p className="text-[#ffffff] font-DMSans font-normal text-xl text-center mt-5">{course.title}</p>
-                    <div className="flex flex-row justify-between items-center w-full mt-3">
-                        <p className="text-[#ffffff] font-DMSans font-normal text-xl text-center">{course.category}</p>
-                        <p className="text-[#ffffff] font-DMSans font-normal text-xl text-center">{course.price}€</p>
-                    </div>
-                </Link>
-            ))}
-        </div>
-    );
+  return (
+    <div className="flex flex-col justify-start items-center gap-4 relative group w-full">
+      {recentCourses.map(course => (
+        <a href={`/courses/${course.id}`} key={course.id} className="w-full lg:w-[90%] h-44 rounded-md bg-[#a4f1658f] hover:bg-Light-Green border border-[#fff] flex flex-row justify-evenly items-center shadow-lg hover:shadow-xl transition-all transition-transform-[500ms]  hover:scale-x-105   " >
+          {course.image && (
+            <div  className='w-[20%] h-44 flex flex-row items-center'>
+              <Image height={1200} width={1200} src={course.image} alt={`Imagen del curso ${course.title}`} className="w-full h-[85%] object-cover rounded-md" />
+            </div>
+          )}
+          <CourseGlassphormish course={course} />
+        </a>
+      ))}
+    </div>
+  );
 }

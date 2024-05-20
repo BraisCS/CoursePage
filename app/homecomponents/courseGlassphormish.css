@@ -1,0 +1,9 @@
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1); /* Fondo semitransparente */
+  backdrop-filter: blur(10px); /* Efecto borroso */
+  -webkit-backdrop-filter: blur(10px); /* Efecto borroso para Safari */
+  border-radius: 10px; /* Bordes redondeados */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Borde semitransparente */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+  padding: 20px; /* Relleno interno */
+}
