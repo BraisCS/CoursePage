@@ -1,5 +1,7 @@
 "use client";
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import Swiper from 'swiper/bundle';
+import 'swiper/swiper-bundle.css';
 
 interface Requirement {
   id: number;
@@ -29,34 +31,39 @@ interface Course {
   updatedAt: Date;
 }
 
-export default function CourseGlassphormish({ course }: { course: Course }) {
-    const [formattedDate, setFormattedDate] = useState('');
+export default function CourseGlassphormish({ courses }: { courses: Course[] }) {
+  const swiperRef = useRef<Swiper | null>(null);
 
-useEffect(() => {
-    if (course.updatedAt) {
-        const date = new Date(course.updatedAt);
-        const options: Intl.DateTimeFormatOptions = {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-        };
-    setFormattedDate(date.toLocaleDateString('es-ES', options));
-    }
-}, [course.updatedAt]);
+  useEffect(() => {
+    swiperRef.current = new Swiper('.swiper-container-first', {
+      slidesPerView: 2.3,
+      spaceBetween: 10,
+      initialSlide: 0,
+      speed: 1000,
+    });
+  }, []);
 
-return (
-    <div className="flex flex-col justify-between items-start gap-1 py-2 w-[75%] glass-effect">
-        <div className="w-full flex flex-row justify-between items-center">
-            <p className="text-Dark font-DMSans font-semibold text-2xl">{course.title}</p>
-            <p className="text-Dark font-DMSans font-semibold text-2xl">{formattedDate}</p>
-        </div>
-        <p className="text-Dark font-DMSans font-normal text-xl">{course.introduction}</p>
-        <div className='w-full flex flex-row justify-between items-center'>
-            <p className="text-Dark font-DMSans font-normal text-xl">{course.category}</p>
-        </div>
+  return (
+    <div className='swiper-container-first overflow-hidden'>
+      <div className='swiper-wrapper flex flex-row'>
+        {courses.map((course, index) => (
+          <div key={index} className="swiper-slide flex flex-col justify-between items-start p-5 min-h-[28rem] min-w-[2rem] rounded-lg border border-Light-Orange bg-[#ffffff30]">
+            <div className='w-full flex flex-col justify-start items-start gap-5'>
+              <div className='flex flex-col justify-start items-start gap-2'>
+                <p className="text-[#fff] font-DMSans font-light text-2xl">{course.title}</p>
+                <p className="text-[#fff] font-DMSans font-extralight text-sm">10 semanas | 2 horas por semana</p>
+              </div>
+              <p className="text-[#fff] font-DMSans font-extralight text-base">{course.introduction}</p>
+            </div>
+            <div className='flex flex-col justify-start items-start gap-2'>
+              <p className="text-[#fff] font-DMSans font-extralight text-4xl">{course.price} €</p>
+              <div className='w-full flex flex-row justify-start items-center'>
+                <a href={`courses/${course.id}`} className="text-[#fff] font-DMSans font-normal text-start py-2 px-6 rounded-lg border border-Light-Orange cursor-pointer">Ver curso</a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
-);
+  );
 }

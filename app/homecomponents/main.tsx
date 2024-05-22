@@ -1,5 +1,4 @@
-"use client"
-import CourseInfo from "./CourseInfo";
+import CourseGlassphormish from "./courseGlassphormish";
 
 interface Requirement {
   id: number;
@@ -33,15 +32,15 @@ export default function Main({coursesWithImages} : { coursesWithImages: Course[]
 
   return (
     <>
-      <main className={`w-[95%] bg lg:w-[100%] flex flex-col justify-start items-center py-10`}>
-        <div className="w-[90%] px-3 py-2 rounded-md">
-          <p className="text-[#ffffff] font-DMSans font-normal text-xl text-center">Descubre el mundo de la programación con nuestra aplicación. Ofrecemos una amplia gama de cursos de programación que te permitirán adquirir nuevas habilidades o perfeccionar las que ya tienes. Desde principiantes hasta expertos, hay algo para todos. ¡Empieza tu viaje de aprendizaje con nosotros hoy mismo!</p>
+      <main className={`w-[95%] lg:w-[95%] ml-[5%] flex flex-row justify-start py-[5%] items-start`}>
+        <div className="w-[45%] flex flex-col justify-start items-start gap-3">
+          <h1 className=" text-[#f6f6f6] font-DMSans font-normal text-5xl"> Todos los cursos de <br /> CATEGORIA</h1>
+          <p className=" text-[#f6f6f6] font-DMSans font-normal text-2xl">  Lorem ipsum dolor sit amet consectetur</p>
+          <p className=" text-[#f6f6f6] font-DMSans font-extralight text-2xl">Lorem ipsum dolor sit amet consectetur adipiscing elit maecenas congue felis, aenean montes per proin sollicitudin rhoncus vel condimentum iaculis eget, erat platea sociis sed porttitor litora quisque orci tortor.</p>
+          <p className=" text-[#eeb462] font-DMSans font-extralight text-lg">  Lorem ipsum dolor sit amet consectetur</p>
         </div>
-        <div className="flex flex-row justify-between items-center lg:block mt-5"></div>
-        <div className={` bg-Dark  w-full flex flex-col justify-start items-center px-3 py-10`}>
-          <div className="flex flex-col justify-evenly items-center gap-5 py-10 w-[90%] rounded-md">
-            <CourseInfo courses={coursesWithImages} /> 
-          </div>
+        <div className="flex flex-row justify-start items-start gap-10 h-[28rem] w-[55%] p-2">
+          <CourseGlassphormish courses={coursesWithImages} />
         </div>
       </main>
     </>

@@ -15,14 +15,17 @@
     "bcryptjs": "^2.4.3",
     "next": "14.1.4",
     "next-auth": "^4.24.7",
-    "react": "^18",
-    "react-dom": "^18"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "swipe": "^1.7.7",
+    "swiper": "^8.4.7"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/swiper": "^6.0.0",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
