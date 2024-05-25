@@ -1,8 +1,57 @@
-.glass-effect {
-  background: rgb(19,128,134);
-  background: linear-gradient(90deg, rgba(19,128,134,1) 40%, rgba(83,70,102,1) 70%);
-  border-radius: 10px; /* Bordes redondeados */
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Borde semitransparente */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
-  padding: 20px; /* Relleno interno */
+.swiper-slide {
+  background: rgba(255, 255, 255, 0.1); /* Adjust transparency */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Adjust shadow color */
+  backdrop-filter: blur(6px); /* Adjust blur */
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.swiper-container-wrapper {
+  position: relative;
+  padding-bottom: 2rem; /* Adjust padding to make space for controls */
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 1rem;
+}
+
+.swiper-pagination {
+  color: #fff;
+  font-family: 'DMSans', sans-serif;
+  font-weight: 300;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.swiper-pagination-fraction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-pagination-fraction .swiper-pagination-current,
+.swiper-pagination-fraction .swiper-pagination-total {
+  font-size: 1rem;
+  color: #fff;
+  margin: 0 0.25rem;
+}
+
+.swiper-pagination-fraction .swiper-pagination-current {
+  font-weight: bold;
 }
