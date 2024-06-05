@@ -54,10 +54,20 @@ export default function CourseGlassphormish({ courses }: { courses: Course[] }) 
           const currentFormatted = current < 10 ? '0' + current : current;
           const totalFormatted = total < 10 ? '0' + total : total;
           return `<span class="swiper-pagination-current">${currentFormatted}</span>
-                  <span class="swiper-pagination-separator"> _____ </span>
+                  <span class="swiper-pagination-separator"> - </span>
                   <span class="swiper-pagination-total">${totalFormatted}</span>`;
         }
       },
+      breakpoints: {
+        320: { // For screens wider than 320px
+          slidesPerView: 1.3,
+          spaceBetween: 10,
+        },
+        640: { // For screens wider than 640px
+          slidesPerView: 2.3,
+          spaceBetween: 10,
+        },
+      }
     });
   }, []);
 
@@ -77,7 +87,7 @@ export default function CourseGlassphormish({ courses }: { courses: Course[] }) 
               <div className='flex flex-col justify-start items-start gap-2 w-full'>
                 <p className="text-[#fff] font-DMSans font-extralight text-4xl">{course.price} €</p>
                 <div className='w-full flex flex-row justify-between items-center'>
-                  <a href={`courses/${course.id}`} className=" w-[80%] text-[#fff] font-DMSans font-normal text-start py-2 px-6 rounded-lg border border-Light-Orange cursor-pointer">Ver curso</a>
+                  <a href={`/courses/${course.id}`} className=" w-[80%] text-[#fff] font-DMSans font-normal text-start py-2 px-6 rounded-lg border border-Light-Orange cursor-pointer">Ver curso</a>
                   <Image height={40} width={40} alt='Icono Bookmark' src={"/bookmark.svg"} />
                 </div>
               </div>
@@ -85,7 +95,7 @@ export default function CourseGlassphormish({ courses }: { courses: Course[] }) 
           ))}
         </div>
       </div>
-      <div className="swiper-controls w-full absolute bottom-6 flex flex-row justify-between items-center p-4">
+      <div className="swiper-controls w-full absolute bottom-6 lg:flex lg:flex-row justify-between items-center p-4 hidden">
         <div className="flex flex-row justify-start items-center">
           <div className="swiper-button-prev"></div>
           <div className="swiper-button-next mr-[85%]"></div>
